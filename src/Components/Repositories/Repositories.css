@@ -1,0 +1,26 @@
+.repo-section{
+    display: flex;
+    flex-wrap: wrap;
+    display: flex;
+    justify-content: flex-start;
+    position: absolute;
+    left: 45%;
+    width: 100%;
+}
+.repos{
+    top: 10vh;
+    padding: 0;
+    position: relative;
+    margin: 0;
+    background-color: rgba(207, 205, 205, 0.466);
+    padding: 1em;
+    width: 45%;
+    margin: 1em;
+}
+.repos .forks{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    background-color: blanchedalmond;
+    margin: 0;
+}

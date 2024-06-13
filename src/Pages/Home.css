@@ -1,0 +1,6 @@
+.repo-users{
+    width: 70%;
+    display: flex;
+    justify-content: flex-end;
+    position: relative;
+}
