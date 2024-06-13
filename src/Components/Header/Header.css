@@ -1,0 +1,26 @@
+.header{
+    display: flex;
+    padding: 2px;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    background-color: #070F2B;
+    margin: 0;
+    height: 10vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+.header h1{
+    color: rgba(255, 255, 255, 0.658);
+}
+.header .search{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.header .search input{
+    height: 2.9em;
+    background-color: white;
+    outline: none;
+}
