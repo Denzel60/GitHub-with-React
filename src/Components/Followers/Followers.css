@@ -1,0 +1,10 @@
+.followers{
+    display: flex;
+    flex-wrap: wrap;
+    display: flex;
+    justify-content: flex-start;
+    position: absolute;
+    left: 48%;
+    width: 100%;
+    overflow-x: hidden;
+}
