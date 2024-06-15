@@ -41,7 +41,7 @@
     flex-wrap: wrap;
     width: 90%;
 }
-.followers-cont .follow{
+.followers-cont .followers{
     width: 40%;
     background-color: #FFF7D6;
     margin: 1em;
@@ -50,7 +50,10 @@
     align-items: center;
     flex-direction: column;
 }
-.followers-cont .follow p{
+.followers-cont .followers img{
+    width: 100%;
+}
+.followers-cont .followers p{
     color: white;
     background-color: black;
     padding: 0.3em;
@@ -58,4 +61,8 @@
     justify-content: center;
     align-items: center;
     width: 30%;
+}
+.followers-cont .followers p a{
+    background-color: black;
+    color: white;
 }

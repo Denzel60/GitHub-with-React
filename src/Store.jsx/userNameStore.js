@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 
 const usernameStore = (set) => ({
-  username: "1vonn",
+  username: "denzel60",
   
   captureUsername: (newName) => {
     set(() => {
