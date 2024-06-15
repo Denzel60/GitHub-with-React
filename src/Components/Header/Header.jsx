@@ -1,22 +1,22 @@
 import './Header.css'
 import { useState } from 'react'
+import useUsernameStore from '../../Store.jsx/userNameStore';
 
 function Header() {
-    // const [username, setUsername] = useState(null)
-    const [name, setName] = useState(null);
+    const captureUsername = useUsernameStore((state) => state.captureUsername)
+    const username = useUsernameStore(state => state.username)
+    const [uname, setUsername] = useState()
 
     const handleUsername = e => {
-        setName(e.target.value)
+        setUsername(e.target.value);
     }
 
-    const handleSearch = () => {
-        // const api_url = "https://api.github.com/users/{username}"
-        // const response = await fetch(api_url);
-        // const result = await response.json();
-        // console.log(result);
-
-        console.log(name)
+    const handleSearch = e => {
+        e.preventDefault();
+        console.log(username)
+        captureUsername(uname)
     }
+
     return (
         <div>
             <section className="header">
