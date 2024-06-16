@@ -60,7 +60,7 @@ function Profile() {
                 <h2>{name}</h2>
                 <h3>{login}</h3>
                 <p>{company}</p>
-                <p>Bio: {bio}</p>
+                <p>{bio}</p>
                 <button>< AiOutlineExport /> <a href={url} target='blank'>View on GitHub</a> </button>
                 <h5>< IoLocationOutline />{location}</h5>
                 <h5>< RiGitRepositoryFill /> {repos} Repositories </h5>
