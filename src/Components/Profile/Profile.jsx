@@ -10,8 +10,10 @@ import { useState } from 'react';
 
 function Profile() {
     const [img, setImg] = useState(null)
+    const [name, setName] = useState(null)
     const [login, setLogin] = useState(null)
     const [company, setCompany] = useState(null)
+    const [bio, setBio] = useState(null)
     const [url, setUrl] = useState(null)
     const [location, setLocation] = useState(null)
     const [repos, setRepos] = useState(null)
@@ -31,11 +33,13 @@ function Profile() {
                 // console.log(result)
 
                 setImg(result.avatar_url)
+                setName(result.name)
                 setLogin(result.login)
                 setCompany(result.company)
+                setBio(result.bio)
                 setUrl(result.html_url)
                 setLocation(result.location)
-                setRepos(result.repos)
+                setRepos(result.public_repos)
                 setfollowers(result.followers)
                 setFollowing(result.following)
             } catch (error) {
@@ -52,8 +56,11 @@ function Profile() {
         <div>
             <section className='profile'>
                 <img src={img} alt="" />
-                <h2>{login}</h2>
+
+                <h2>{name}</h2>
+                <h3>{login}</h3>
                 <p>{company}</p>
+                <p>Bio: {bio}</p>
                 <button>< AiOutlineExport /> <a href={url} target='blank'>View on GitHub</a> </button>
                 <h5>< IoLocationOutline />{location}</h5>
                 <h5>< RiGitRepositoryFill /> {repos} Repositories </h5>

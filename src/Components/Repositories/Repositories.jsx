@@ -8,6 +8,7 @@ import { useState } from 'react';
 function Repositories() {
     const [repositories, setRepositories] = useState([]);
     const [follows, setfollows] = useState([]);
+    const [following, setfollowing] = useState([]);
 
     const username = useUsernameStore(state => state.username)
 
@@ -48,6 +49,23 @@ function Repositories() {
     }
 
 
+    if (username != null) {
+        (
+            async () => {
+                try {
+                    const fetch_url = `https://api.github.com/users/${username}/following`
+                    const output = await fetch(fetch_url);
+                    const display = await output.json();
+                    setfollowing(display)
+
+                } catch (error) {
+                    console.log("There was an error fetching the followers")
+                }
+            }
+        )();
+    }
+
+
     return (
         <div className='repo-section'>
 
@@ -62,8 +80,8 @@ function Repositories() {
                         </div>
 
                         <div className="forks">
-                            <p><FaCodeFork />{repo.forks_count}</p>
-                            <p><FaStar />{repo.stargazers_count}</p>
+                            <p><FaCodeFork />{repo.forks_count} forks</p>
+                            <p><FaStar />{repo.stargazers_count} stars</p>
                         </div>
                     </section>
                 ))}
@@ -75,6 +93,19 @@ function Repositories() {
 
             <div className="followers-cont">
                 {follows.map(follow => (
+                    <div className="followers" key={follow.id}>
+                        <img src={follow.avatar_url} alt="" />
+                        <h3>{follow.login}</h3>
+                        <p><a href={follow.html_url} target="blank" >< IoLinkSharp /> link</a></p>
+                    </div>))}
+            </div>
+
+            <section className="follow">
+                <h1>Following</h1>
+            </section>
+
+            <div className="followers-cont">
+                {following.map(follow => (
                     <div className="followers" key={follow.id}>
                         <img src={follow.avatar_url} alt="" />
                         <h3>{follow.login}</h3>
