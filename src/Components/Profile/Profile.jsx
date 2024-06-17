@@ -7,6 +7,7 @@ import { AiOutlineExport } from "react-icons/ai";
 // import gitHubImg from "../../assets/github.png"
 import useUsernameStore from '../../Store.jsx/userNameStore';
 import { useState } from 'react';
+import { HashLoader } from 'react-spinners'
 
 function Profile() {
     const [img, setImg] = useState(null)
@@ -20,6 +21,9 @@ function Profile() {
     const [followers, setfollowers] = useState(null)
     const [following, setFollowing] = useState(null)
 
+    const [error, setError] = useState(null)
+    const [load, setLoad] = useState(null)
+
     // const captureUsername = useUsernameStore(state => state.captureUsername)
     const username = useUsernameStore(state => state.username)
     console.log(`From the profile, the usernme is ${username}`)
@@ -28,8 +32,10 @@ function Profile() {
         (async () => {
             try {
                 const api_url = `https://api.github.com/users/${username}`;
+                setLoad(true)
                 const response = await fetch(api_url)
                 const result = await response.json();
+                setLoad(false)
                 // console.log(result)
 
                 setImg(result.avatar_url)
@@ -44,6 +50,7 @@ function Profile() {
                 setFollowing(result.following)
             } catch (error) {
                 console.log("There was an error")
+                setError(error.message)
             }
         })();
     } else {
@@ -58,6 +65,7 @@ function Profile() {
                 <img src={img} alt="" />
 
                 <h2>{name}</h2>
+                <h1>{error}{load && <HashLoader color="#070F2B" />}</h1>
                 <h3>{login}</h3>
                 <p>{company}</p>
                 <p>{bio}</p>
