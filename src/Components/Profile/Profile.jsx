@@ -1,82 +1,64 @@
-import './Profile.css'
+import { useEffect, useState } from 'react';
+import { HashLoader } from 'react-spinners';
 import { IoLocationOutline } from "react-icons/io5";
-// import { FaBuilding } from "react-icons/fa6";
 import { RiGitRepositoryFill } from "react-icons/ri";
 import { BsPeopleFill } from "react-icons/bs";
 import { AiOutlineExport } from "react-icons/ai";
-// import gitHubImg from "../../assets/github.png"
 import useUsernameStore from '../../Store.jsx/userNameStore';
-import { useState } from 'react';
-import { HashLoader } from 'react-spinners'
+import './Profile.css';
 
 function Profile() {
-    const [img, setImg] = useState(null)
-    const [name, setName] = useState(null)
-    const [login, setLogin] = useState(null)
-    const [company, setCompany] = useState(null)
-    const [bio, setBio] = useState(null)
-    const [url, setUrl] = useState(null)
-    const [location, setLocation] = useState(null)
-    const [repos, setRepos] = useState(null)
-    const [followers, setfollowers] = useState(null)
-    const [following, setFollowing] = useState(null)
+    const [profile, setProfile] = useState(null);
+    const [error, setError] = useState(null);
+    const [load, setLoad] = useState(false);
 
-    const [error, setError] = useState(null)
-    const [load, setLoad] = useState(null)
+    const username = useUsernameStore(state => state.username);
 
-    // const captureUsername = useUsernameStore(state => state.captureUsername)
-    const username = useUsernameStore(state => state.username)
-    console.log(`From the profile, the usernme is ${username}`)
+    useEffect(() => {
+        if (username) {
+            const fetchProfile = async () => {
+                try {
+                    setLoad(true);
+                    const response = await fetch(`https://api.github.com/users/${username}`);
+                    const result = await response.json();
+                    setProfile(result);
+                } catch (error) {
+                    console.error("There was an error", error);
+                    setError(error.message);
+                } finally {
+                    setLoad(false);
+                }
+            };
 
-    if (username != null) {
-        (async () => {
-            try {
-                const api_url = `https://api.github.com/users/${username}`;
-                setLoad(true)
-                const response = await fetch(api_url)
-                const result = await response.json();
-                setLoad(false)
-                // console.log(result)
+            fetchProfile();
+        }
+    }, [username]);
 
-                setImg(result.avatar_url)
-                setName(result.name)
-                setLogin(result.login)
-                setCompany(result.company)
-                setBio(result.bio)
-                setUrl(result.html_url)
-                setLocation(result.location)
-                setRepos(result.public_repos)
-                setfollowers(result.followers)
-                setFollowing(result.following)
-            } catch (error) {
-                console.log("There was an error")
-                setError(error.message)
-            }
-        })();
-    } else {
-        alert("Please enter username")
+    if (!profile) {
+        return <div>Loading...</div>;
     }
 
-
-    console.log(username)
     return (
         <div>
             <section className='profile'>
-                <img src={img} alt="" />
-
-                <h2>{name}</h2>
-                <h1>{error}{load && <HashLoader color="#070F2B" />}</h1>
-                <h3>{login}</h3>
-                <p>{company}</p>
-                <p>{bio}</p>
-                <button>< AiOutlineExport /> <a href={url} target='blank'>View on GitHub</a> </button>
-                <h5>< IoLocationOutline />{location}</h5>
-                <h5>< RiGitRepositoryFill /> {repos} Repositories </h5>
-                <h5>< BsPeopleFill /> {followers} followers</h5>
-                <h5>< BsPeopleFill /> {following} following</h5>
+                <img src={profile.avatar_url} alt={profile.name} key={profile.id} />
+                <h2>{profile.name}</h2>
+                {error && <h1>{error}</h1>}
+                {load && <HashLoader color="#070F2B" />}
+                <h3>{profile.login}</h3>
+                <p>{profile.company}</p>
+                <p>{profile.bio}</p>
+                <button>
+                    <AiOutlineExport />
+                    <a href={profile.html_url} target='blank'>View on GitHub</a>
+                </button>
+                <h5><IoLocationOutline />{profile.location}</h5>
+                <h5><RiGitRepositoryFill /> {profile.public_repos} Repositories</h5>
+                <h5><BsPeopleFill /> {profile.followers} followers</h5>
+                <h5><BsPeopleFill /> {profile.following} following</h5>
             </section>
         </div>
-    )
+    );
 }
 
-export default Profile
+export default Profile;

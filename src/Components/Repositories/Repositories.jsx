@@ -5,6 +5,8 @@ import { IoLinkSharp } from "react-icons/io5";
 import useUsernameStore from '../../Store.jsx/userNameStore';
 import { useState } from 'react';
 import { HashLoader } from 'react-spinners'
+import { useEffect } from 'react';
+
 
 function Repositories() {
     const [repositories, setRepositories] = useState([]);
@@ -15,9 +17,8 @@ function Repositories() {
 
     const username = useUsernameStore(state => state.username)
 
-    console.log(`The username is ${username} from repos`)
+    useEffect(() => {
 
-    if (username != null) {
         (
             async () => {
                 try {
@@ -33,12 +34,7 @@ function Repositories() {
                 }
             }
         )();
-    } else {
-        console.log("Username is null")
-    }
 
-
-    if (username != null) {
         (
             async () => {
                 try {
@@ -55,10 +51,7 @@ function Repositories() {
                 }
             }
         )();
-    }
 
-
-    if (username != null) {
         (
             async () => {
                 try {
@@ -74,8 +67,8 @@ function Repositories() {
                 }
             }
         )();
-    }
 
+    }, [username])
 
     return (
         <div className='repo-section'>
@@ -110,21 +103,23 @@ function Repositories() {
                         <img src={follow.avatar_url} alt="" />
                         <h3>{follow.login}</h3>
                         <p><a href={follow.html_url} target="blank" >< IoLinkSharp /> link</a></p>
-                    </div>))}
+                    </div>
+                ))}
             </div>
 
             <section className="follow">
                 <h1>Following</h1>
             </section>
 
-            <div className="followers-cont">
+            <div className="followers-cont" >
                 {following.map(follow => (
                     <div className="followers" key={follow.id}>
                         <h1>{error}{load && <HashLoader color="#070F2B" />}</h1>
                         <img src={follow.avatar_url} alt="" />
                         <h3>{follow.login}</h3>
                         <p><a href={follow.html_url} target="blank" >< IoLinkSharp /> link</a></p>
-                    </div>))}
+                    </div>
+                ))}
             </div>
 
         </div >
