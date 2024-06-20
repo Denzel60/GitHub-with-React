@@ -73,7 +73,7 @@ function Repositories() {
     return (
         <div className='repo-section'>
 
-            <h1 className='repo-heading'>Repositories</h1>
+            <h1 className='repo-heading'>Repositories ({repositories.length})</h1>
 
             <section className="repositories">
                 {repositories.map(repo => (
@@ -93,7 +93,7 @@ function Repositories() {
             </section>
 
             <section className="follow">
-                <h1>Followers</h1>
+                <h1>Followers ({follows.length})</h1>
             </section>
 
             <div className="followers-cont">
@@ -108,7 +108,7 @@ function Repositories() {
             </div>
 
             <section className="follow">
-                <h1>Following</h1>
+                <h1>Following ({following.length})</h1>
             </section>
 
             <div className="followers-cont" >

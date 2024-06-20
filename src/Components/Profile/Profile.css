@@ -1,8 +1,8 @@
 .profile{
     width: 30%;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: flex-start;
+    align-items: flex-start;
     position: fixed;
     height: 100vh;
     top: 10vh;
@@ -11,13 +11,14 @@
     /* padding: 0em 0em;
     margin: 0em 0em; */
     border-right: 2px solid rgba(231, 225, 225, 0.671);
+    padding: 0 2em;
 }
 .profile img{
-    width: 50%;
+    width: 80%;
     border-radius: 1em;
 }
 .profile button{
-    width: 60%;
+    width: 80%;
     background-color: #070F2B;
     color: white;
     border-radius: 5px;
