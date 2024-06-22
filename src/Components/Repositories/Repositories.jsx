@@ -70,6 +70,10 @@ function Repositories() {
 
     }, [username])
 
+    if (!repositories && !follows && !following) {
+        return <div>Loading...</div>;
+    }
+
     return (
         <div className='repo-section'>
 
@@ -81,6 +85,7 @@ function Repositories() {
                         <div className="title">
                             <h1>{error}{load && <HashLoader color="#070F2B" />}</h1>
                             <h3>{repo.name}</h3>
+                            <a href={repo.html_url} target='blank'>link to repository</a>
                             <p>{repo.description}</p>
                         </div>
 

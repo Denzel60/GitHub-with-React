@@ -6,7 +6,7 @@
     width: 100%;
     background-color: #070F2B;
     margin: 0;
-    height: 10vh;
+    /* height: 10vh; */
     position: fixed;
     top: 0;
     left: 0;
@@ -14,6 +14,12 @@
 }
 .header h1{
     color: rgba(255, 255, 255, 0.658);
+    padding: 0;
+    margin: 0;
+}
+.header a{
+    margin: 0;
+    padding: 0;
 }
 .header .search{
     display: flex;
@@ -25,4 +31,10 @@
     background-color: white;
     outline: none;
     color: black;
+}
+
+@media(max-width: 730px){
+    .header{
+        flex-direction: column;
+    }
 }

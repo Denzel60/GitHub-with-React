@@ -5,7 +5,7 @@
     position: absolute;
     display: flex;
     justify-content: flex-start;
-    align-items: center;
+    align-items: flex-start;
     flex-direction: column;
 }
 
@@ -25,6 +25,11 @@
 }
 .repos .title{
     width: 100%;
+}
+.repos .title a{
+    background-color: #070F2B;
+    padding: 0.25em 1em;
+    border-radius: 0.25em;
 }
 .repos .forks{
     display: flex;
@@ -65,4 +70,16 @@
 .followers-cont .followers p a{
     background-color: black;
     color: white;
+}
+
+@media (max-width: 730px){
+    .repositories .repos{
+        width: 90%;
+    }
+    .followers-cont{
+        flex-direction: column;
+    }
+    .followers-cont .followers{
+        width: 80%;
+    }
 }
