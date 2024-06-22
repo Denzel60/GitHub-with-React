@@ -4,8 +4,8 @@
     left: 45%;
     position: absolute;
     display: flex;
-    justify-content: flex-start;
-    align-items: flex-start;
+    justify-content: center;
+    align-items: center;
     flex-direction: column;
 }
 
